@@ -17,6 +17,7 @@ namespace Engine
         private (int x, int y) PortalRoom;
 
         public Player GetPlayer() { return player; }
+        public Room GetCurrentRoom() { return current_room; }
         private void RandWalk(int how_many_roooms)
         {
             int how_many_left = how_many_roooms;
@@ -66,6 +67,8 @@ namespace Engine
         }
         public Maze() 
         {
+            list_of_rooms = new List<(int x, int y)>();
+            rooms = new List<Room>();
             player = new Player(this);
             where_are_rooms = new int[10, 10];
             for(int i = 0; i < 10; i++)
@@ -88,9 +91,16 @@ namespace Engine
             current_room = new Room(this, list_of_rooms.ElementAt(starting_room_index).x, list_of_rooms.ElementAt(starting_room_index).y);
             rooms.Add(current_room);
             where_are_rooms[list_of_rooms.ElementAt(starting_room_index).y, list_of_rooms.ElementAt(starting_room_index).x] = 2;
+            List<(int x, int y)> list_of_placements = current_room.GetPossiblePlacement();
+            (int x, int y) random_placement = list_of_placements.ElementAt(rand.Next(list_of_placements.Count));
+            player.SetPlayerXPos(random_placement.x);
+            player.SetPlayerYPos(random_placement.y);
+            current_room.FillMap();
         }
         public Maze(Player player)
         {
+            list_of_rooms = new List<(int x, int y)>();
+            rooms = new List<Room>();
             this.player = player;
             where_are_rooms = new int[10, 10];
             for (int i = 0; i < 10; i++)
@@ -113,19 +123,106 @@ namespace Engine
             current_room = new Room(this, list_of_rooms.ElementAt(starting_room_index).x, list_of_rooms.ElementAt(starting_room_index).y);
             rooms.Add(current_room);
             where_are_rooms[list_of_rooms.ElementAt(starting_room_index).y, list_of_rooms.ElementAt(starting_room_index).x] = 2;
+            List<(int x, int y)> list_of_placements = current_room.GetPossiblePlacement();
+            (int x, int y) random_placement = list_of_placements.ElementAt(rand.Next(list_of_placements.Count));
+            player.SetPlayerXPos(random_placement.x);
+            player.SetPlayerYPos(random_placement.y);
+            current_room.FillMap();
         }
-        public bool HasRoomKey() { return (KeyRoom.x == current_room.GetRoomXY().x && KeyRoom.y == current_room.GetRoomXY().y); }
+        public bool HasRoomKey(int X , int Y) { return (KeyRoom.x == X && KeyRoom.y == Y); }
         public bool HasRoomPortal(int x, int y) { return (PortalRoom.x == x && PortalRoom.y == y); }
-        public List<int> NeighborRooms() 
+        public List<int> NeighborRooms(int x, int y) 
         { 
             List<int> list_of_directions = new List<int>();
 
-            (int x, int y) x_y = current_room.GetRoomXY();
+            (int x, int y) x_y = (x,y);
             if (x_y.x > 0 && where_are_rooms[x_y.y, x_y.x - 1] != 0) list_of_directions.Add(0);
-            if (x_y.x < 10 && where_are_rooms[x_y.y, x_y.x + 1] != 0) list_of_directions.Add(1);
+            if (x_y.x < 9 && where_are_rooms[x_y.y, x_y.x + 1] != 0) list_of_directions.Add(1);
             if (x_y.y > 0 && where_are_rooms[x_y.y - 1, x_y.x] != 0) list_of_directions.Add(2);
-            if (x_y.y < 10 && where_are_rooms[x_y.y + 1, x_y.x] != 0) list_of_directions.Add(3);
+            if (x_y.y < 9 && where_are_rooms[x_y.y + 1, x_y.x] != 0) list_of_directions.Add(3);
             return list_of_directions;
+        }
+
+        public char[,] GetMap()
+        {
+            int size_x = current_room.GetSizeX();
+            int size_y = current_room.GetSizeY();
+            char[,] map = new char[size_y + 2, size_x + 2];
+            current_room.FillMap();
+            int[,] value_map = current_room.GetMap();
+            for (int y = 0; y < size_y + 2; y++)
+            {
+                for(int x = 0; x < size_x + 2; x++)
+                {
+                    if (y == 0 || y == size_y + 1) map[y, x] = '-';
+                    if (x == 0 || x == size_x + 1) map[y, x] = '|';
+                    if ((y == 0 && x == 0) ||
+                        (y == 0 && x == size_x + 1) ||
+                        (y == size_y + 1 && x == 0) ||
+                        (y == size_y + 1 && x == size_x + 1)) map[y, x] = '+';
+                    if(y > 0 && x > 0 && x < size_x + 1 && y < size_y + 1)
+                    {
+                        /*
+             * 0 - empty space
+             * 1 - portal
+             * 2 - door
+             * 3 - player
+             * 4 - abyss
+             * 5 - pillar
+             * 6 - corpse
+             * 7 - warrior
+             * 8 - archer
+             * 9 - pedestal
+             */
+                        switch (value_map[y-1, x-1])
+                        {
+                            default:
+                            case 0:
+                                map[y, x] = ' '; //Puste Pole
+                                break;
+                            case 1:
+                                map[y, x] = 'P'; // Portal
+                                break;
+                            case 2:
+                                map[y, x] = 'D'; // Drzwi
+                                break;
+                            case 3:
+                                map[y, x] = '@'; // Gracz
+                                break;
+                            case 4:
+                                map[y, x] = 'O'; // Otchłań
+                                break;
+                            case 5:
+                                map[y, x] = 'C'; // Pilar
+                                break;
+                            case 6:
+                                map[y, x] = 'Z'; // Zwłoki
+                                break;
+                            case 7:
+                                map[y, x] = 'W'; // Wojownik
+                                break;
+                            case 8:
+                                map[y, x] = 'S'; // Łucznik
+                                break;
+                            case 9:
+                                map[y, x] = 'K'; // Klucz
+                                break;
+                        }
+                    }
+                }
+            }
+            return map;
+        }
+
+        public int RoomNumber()
+        {
+            int i = 0;
+            foreach(Room room in rooms)
+            {
+                if (room.GetRoomXY() == current_room.GetRoomXY()) return i;
+                i++;
+            }
+            return -1;
         }
     }
 }

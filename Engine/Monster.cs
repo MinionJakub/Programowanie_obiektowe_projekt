@@ -17,14 +17,14 @@ namespace Engine
         protected int XPos;
         protected int YPos;
         protected bool escaping;
-        protected Room terrain;
+        protected Room terrain; 
 
         public int GetXPos() { return XPos; }
         public int GetYPos() { return YPos; }
         public void SetXPos(int x) { XPos = x; }
         public void SetYPos(int y) { YPos = y; }
         public int GetHealth() { return Health; }
-        public void SetHealth(int health) { Health = health; }
+        public void SetHealth(int health) { Health = health; this.Death(); }
         public int GetSpeed() { return Speed; }
         public void SetSpeed(int speed) { Speed = speed; }
         protected void Attack()
@@ -51,7 +51,7 @@ namespace Engine
            */
             switch (map[y, x])
             {
-                case 0: case 1: case 2: case 4: case 6: return true;
+                case 0: case 1: case 2: case 6: return true;
                 default: return false;
             }
         }
@@ -90,7 +90,7 @@ namespace Engine
                         {
                             for (int j = YPos - Speed; j <= YPos + Speed; j++)
                             {
-                                if (j >= 0 && j <= terrain.GetSizeY())
+                                if (j >= 0 && j < terrain.GetSizeY())
                                 {
                                     if (i - XPos < 0 || j - YPos < 0)
                                     {
@@ -108,7 +108,7 @@ namespace Engine
                         {
                             for (int j = YPos - Speed; j <= YPos + Speed; j++)
                             {
-                                if (j >= 0 && j <= terrain.GetSizeY())
+                                if (j >= 0 && j < terrain.GetSizeY())
                                 {
                                     if (i - XPos > 0 || j - YPos < 0)
                                     {
@@ -127,7 +127,7 @@ namespace Engine
                         {
                             for (int j = YPos - Speed; j <= YPos + Speed; j++)
                             {
-                                if (j >= 0 && j <= terrain.GetSizeY())
+                                if (j >= 0 && j < terrain.GetSizeY())
                                 {
                                     if (i - XPos > 0 || j - YPos > 0)
                                     { 
@@ -146,7 +146,7 @@ namespace Engine
                         {
                             for (int j = YPos - Speed; j <= YPos + Speed; j++)
                             {
-                                if (j >= 0 && j <= terrain.GetSizeY())
+                                if (j >= 0 && j < terrain.GetSizeY())
                                 {
                                     if (i - XPos < 0 || j - YPos > 0)
                                     {
@@ -167,7 +167,7 @@ namespace Engine
                         {
                             for (int j = YPos - Speed; j <= YPos + Speed; j++)
                             {
-                                if (j >= 0 && j <= terrain.GetSizeY())
+                                if (j >= 0 && j < terrain.GetSizeY())
                                 {
                                     if (i - XPos >= 0 && j - YPos >= 0)
                                     {
@@ -236,11 +236,18 @@ namespace Engine
                 }//Znalezienie wszystkich mozliwych ruchow oddalajacych od gracza jesli jest w 1.
             }
             var rand = new Random();
-            (int x, int y) pos = list_of_moves[rand.Next(list_of_moves.Count)];
-            terrain.ChangePlace(XPos, YPos, pos.x, pos.y);
-            XPos = pos.x;
-            YPos = pos.y;
-            
+            (int x, int y) pos = (-1,-1);
+            if (list_of_moves.Count != 0)pos = list_of_moves[rand.Next(list_of_moves.Count)];
+            while(list_of_moves.Count != 0 && !(terrain.OnPossible_placement(pos.x, pos.y))){
+                list_of_moves.Remove(pos);
+                pos = list_of_moves[rand.Next(list_of_moves.Count)];
+            }
+            if(list_of_moves.Count != 0)
+            {
+                terrain.ChangePlace(XPos, YPos, pos.x, pos.y);
+                XPos = pos.x;
+                YPos = pos.y;
+            }
         }
         protected abstract bool CanAttack();
         public abstract void MakeTurn();

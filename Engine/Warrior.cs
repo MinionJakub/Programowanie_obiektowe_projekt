@@ -53,21 +53,15 @@ namespace Engine
             }
             int player_x = gracz.GetPlayerXPos();
             int player_y = gracz.GetPlayerYPos();
-            if (player_x == XPos &&
-                player_y - YPos <= Reach &&
-                player_y - YPos > 0 &&
+            int absolute_diff_x = Math.Abs(player_x - XPos);
+            int absolute_diff_y = Math.Abs(player_y - YPos);
+            if (absolute_diff_x <= Reach && absolute_diff_y <= Reach &&
                 list_of_blocks_y_pos.Count == 0) return true;
-            else if (player_x == XPos &&
-                YPos - player_y <= Reach &&
-                YPos - player_y > 0 &&
+            else if (absolute_diff_x <= Reach && absolute_diff_y <= Reach &&
                 list_of_blocks_y_neg.Count == 0) return true;
-            else if (player_y == YPos &&
-                player_x - XPos <= Reach &&
-                player_x - XPos > 0 &&
+            else if (absolute_diff_x <= Reach && absolute_diff_y <= Reach &&
                 list_of_blocks_x_pos.Count == 0) return true;
-            else if (player_y == YPos &&
-                XPos - player_x <= Reach &&
-                XPos - player_x > 0 &&
+            else if (absolute_diff_x <= Reach && absolute_diff_y <= Reach &&
                 list_of_blocks_y_pos.Count == 0) return true;
             return false;
         }
