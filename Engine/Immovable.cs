@@ -14,6 +14,14 @@ namespace Engine
         protected Room terrain;
         protected bool hasKey;
 
+        public Room Room
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public int GetXPos() { return XPos; }
         public int GetYPos() { return YPos; }
 

@@ -186,12 +186,12 @@ namespace Engine
                     FillImmovables(rand.Next(20, 26), rand);
                     break;
                 case 2:
-                    FillMonsters(rand.Next(10, 17), rand);
+                    FillMonsters(rand.Next(10, 13), rand);
                     FillImmovables(rand.Next(15, 26), rand);
                     break;
                 case 3:
-                    FillMonsters(rand.Next(12, 21), rand);
-                    FillImmovables(rand.Next(40, 51), rand);
+                    FillMonsters(rand.Next(12, 17), rand);
+                    FillImmovables(rand.Next(30, 41), rand);
                     break;
             }
 
@@ -286,6 +286,38 @@ namespace Engine
         public bool HasMonster()
         {
             return (monsters.Count != 0);
+        }
+
+        public Monster Monster
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Immovable Immovable
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Entries Entries
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Maze Maze
+        {
+            get => default;
+            set
+            {
+            }
         }
     }
 }

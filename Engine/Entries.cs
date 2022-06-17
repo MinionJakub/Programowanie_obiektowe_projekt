@@ -22,6 +22,14 @@ namespace Engine
 
         }
 
+        public Room Room
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public (int x, int y) GetEntrieXY() { return (posX, posY); }
         public bool IsPortal() { return portal; }
         public void PlayerWantToPassThrought()

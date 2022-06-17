@@ -17,7 +17,15 @@ namespace Engine
         protected int XPos;
         protected int YPos;
         protected bool escaping;
-        protected Room terrain; 
+        protected Room terrain;
+
+        public Room Room
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         public int GetXPos() { return XPos; }
         public int GetYPos() { return YPos; }

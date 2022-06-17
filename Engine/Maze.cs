@@ -202,7 +202,7 @@ namespace Engine
                                 map[y, x] = 'W'; // Wojownik
                                 break;
                             case 8:
-                                map[y, x] = 'S'; // Łucznik
+                                map[y, x] = 'A'; // Łucznik
                                 break;
                             case 9:
                                 map[y, x] = 'K'; // Klucz
@@ -223,6 +223,22 @@ namespace Engine
                 i++;
             }
             return -1;
+        }
+
+        public Room Room
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public Player Player
+        {
+            get => default;
+            set
+            {
+            }
         }
     }
 }

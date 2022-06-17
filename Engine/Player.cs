@@ -230,5 +230,13 @@ namespace Engine
                 }
             }
         }
+
+        public Maze Maze
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

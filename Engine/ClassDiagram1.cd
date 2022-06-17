@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="currentGameLevel - Maze&#xD;&#xA;">
+    <Position X="2.066" Y="3.029" Height="0.706" Width="1.36" />
+  </Comment>
+  <Comment CommentText="current_room - Room&#xD;&#xA;rooms - List&lt;Room&gt;&#xD;&#xA;labyrinth - Maze">
+    <Position X="3.877" Y="5.157" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="terrain - Room">
+    <Position X="7.213" Y="7.593" Height="0.431" Width="1.287" />
+  </Comment>
+  <Class Name="Engine.Player">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAKCCAItAACAQAAAAFABABoAEAAoAhCAAwAiMACDA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Maze" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Engine.Maze">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABBIEAAAAAAAAAEAAFcAIAAAAAAAAAABAAIgAQABgAE=</HashCode>
+      <FileName>Maze.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Room" />
+      <Property Name="Player" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Engine.Room">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MpAIEAAAYAAQAWIAABQgAAAQgAJBAAIAEhCCADIBAYA=</HashCode>
+      <FileName>Room.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Monster" />
+      <Property Name="Immovable" />
+      <Property Name="Entries" />
+      <Property Name="Maze" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Engine.Monster">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAgCACAAIAACAgAoBAUABABgIEAAAAhAAAQAiBAABA=</HashCode>
+      <FileName>Monster.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Room" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Engine.Warrior">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Warrior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Engine.Archer">
+    <Position X="11.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Archer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Engine.Immovable">
+    <Position X="8.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAASAAAAAAAAAgBAAAAABgAAAAAABAAAgAABAAAA=</HashCode>
+      <FileName>Immovable.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Room" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Engine.Pillar" Collapsed="true">
+    <Position X="11.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Immovable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Engine.Abyss" Collapsed="true">
+    <Position X="11.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Immovable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Engine.Corpse" Collapsed="true">
+    <Position X="11.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Immovable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Engine.Entries">
+    <Position X="11.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAgQAAAAAAAAAAFAwAAAAQA=</HashCode>
+      <FileName>Entries.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Room" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
