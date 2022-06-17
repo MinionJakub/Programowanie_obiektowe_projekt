@@ -25,8 +25,49 @@ namespace DungeonCrawler
             Y_Move.Minimum = 0;
             Y_Move.Maximum = _player.GetCurrentGameLevel().GetCurrentRoom().GetSizeY();
             UpdateMap();
+            FillLegenda();
         }
 
+        public Player Player
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        private void FillLegenda()
+        {
+            /*
+             * 0 - empty space
+             * 1 - portal
+             * 2 - door
+             * 3 - player
+             * 4 - abyss
+             * 5 - pillar
+             * 6 - corpse
+             * 7 - warrior
+             * 8 - archer
+             * 9 - pedestal
+                ' ' // Puste Pole
+                'P' // Portal
+                'D'; // Drzwi
+                '@'; // Gracz
+                'O'; // Otch³añ
+                'C'; // Pilar
+                'Z'; // Zw³oki
+                'W'; // Wojownik
+                'A'; // £ucznik
+                'K'; // Klucz
+             */
+
+            string Tekst = "Map Symbols :\n";
+            Tekst += "P - Portal\nD - Door\n";
+            Tekst += "@ - Player\nO - Abyss\nC - Cover\nZ - Corpse\n";
+            Tekst += "W - Warrior\nA - Archer\nK - Key";
+            Legenda.Text = Tekst;
+
+        }
         private void MoveButton_Click(object sender, EventArgs e)
         {
             int X = (int)X_Move.Value;
@@ -146,5 +187,6 @@ namespace DungeonCrawler
             Y_Move.Maximum = _player.GetCurrentGameLevel().GetCurrentRoom().GetSizeY();
             UpdateMap();
         }
+
     }
 }

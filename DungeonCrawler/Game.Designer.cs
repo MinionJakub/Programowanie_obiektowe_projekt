@@ -62,6 +62,8 @@
             this.NewGameButton = new System.Windows.Forms.Button();
             this.lblReachValue = new System.Windows.Forms.Label();
             this.ReachLabel = new System.Windows.Forms.Label();
+            this.Legenda = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.X_Move)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.X_Attack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Y_Move)).BeginInit();
@@ -379,7 +381,7 @@
             // 
             this.lblReachValue.AutoSize = true;
             this.lblReachValue.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblReachValue.Location = new System.Drawing.Point(281, 12);
+            this.lblReachValue.Location = new System.Drawing.Point(303, 8);
             this.lblReachValue.Name = "lblReachValue";
             this.lblReachValue.Size = new System.Drawing.Size(23, 28);
             this.lblReachValue.TabIndex = 35;
@@ -389,17 +391,36 @@
             // 
             this.ReachLabel.AutoSize = true;
             this.ReachLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.ReachLabel.Location = new System.Drawing.Point(203, 12);
+            this.ReachLabel.Location = new System.Drawing.Point(225, 9);
             this.ReachLabel.Name = "ReachLabel";
             this.ReachLabel.Size = new System.Drawing.Size(72, 28);
             this.ReachLabel.TabIndex = 34;
             this.ReachLabel.Text = "Reach :";
+            // 
+            // Legenda
+            // 
+            this.Legenda.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Legenda.Location = new System.Drawing.Point(551, 13);
+            this.Legenda.Name = "Legenda";
+            this.Legenda.Size = new System.Drawing.Size(194, 405);
+            this.Legenda.TabIndex = 36;
+            this.Legenda.Text = "";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(18, 459);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(716, 572);
+            this.richTextBox1.TabIndex = 37;
+            this.richTextBox1.Text = "";
             // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1353, 1055);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.Legenda);
             this.Controls.Add(this.lblReachValue);
             this.Controls.Add(this.ReachLabel);
             this.Controls.Add(this.NewGameButton);
@@ -482,5 +503,7 @@
         private Button NewGameButton;
         private Label lblReachValue;
         private Label ReachLabel;
+        private RichTextBox Legenda;
+        private RichTextBox richTextBox1;
     }
 }
